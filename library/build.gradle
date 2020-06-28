@@ -29,14 +29,42 @@ compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
 }
 
-publishing { // https://docs.gradle.org/current/userguide/publishing_maven.html
+/**
+ * Allows the library files to be used in Android or other java project
+ *
+ * - https://jitpack.io/docs/BUILDING/
+ * - https://docs.gradle.org/current/userguide/publishing_maven.html
+ */
+publishing {
     publications {
-        maven(MavenPublication) {
-            groupId = 'dev.hossain.hangouts'
+        mavenJava(MavenPublication) {
             artifactId = 'json-parser'
-            version = '1.0-SNAPSHOT'
 
-            from components.java
+
+            pom {
+                name = 'Hangouts JSON Parser'
+                description = 'Google Hangouts takeout JSON file parser.'
+                url = 'https://github.com/amardeshbd/kotlin-google-hangouts-parser'
+
+                licenses {
+                    license {
+                        name = 'MIT License'
+                        url = 'https://github.com/amardeshbd/kotlin-google-hangouts-parser/blob/master/LICENSE'
+                    }
+                }
+                developers {
+                    developer {
+                        id = 'amardeshbd'
+                        name = 'Hossain Khan'
+                        email = 'eng@hossain.dev'
+                    }
+                }
+                scm {
+                    connection = 'scm:git:https://github.com/amardeshbd/kotlin-google-hangouts-parser.git'
+                    developerConnection = 'scm:git:git@github.com:amardeshbd/kotlin-google-hangouts-parser.git'
+                    url = 'https://github.com/amardeshbd/kotlin-google-hangouts-parser'
+                }
+            }
         }
     }
 }
