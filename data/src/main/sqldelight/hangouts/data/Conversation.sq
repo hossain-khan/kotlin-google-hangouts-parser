@@ -1,0 +1,14 @@
+CREATE TABLE conversation (
+  id TEXT NOT NULL PRIMARY KEY,
+  type TEXT NOT NULL,
+  network_type TEXT AS kotlin.collections.List<String> NOT NULL
+);
+
+
+selectAll:
+SELECT *
+FROM conversation;
+
+insert:
+INSERT INTO conversation(id, type, network_type)
+VALUES (?, ?, ?);
