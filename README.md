@@ -1,5 +1,5 @@
 # Google Hangouts JSON Parser
-Contains JSON model classes using [Moshi](https://github.com/square/moshi) JSON parser. See [JSON model classe](https://github.com/amardeshbd/kotlin-google-hangouts-parser/tree/master/src/main/kotlin/dev/hossain/model) sources. 
+Contains JSON model classes using [Moshi](https://github.com/square/moshi) JSON parser. See [JSON model classes](https://github.com/amardeshbd/kotlin-google-hangouts-parser/tree/master/library/src/main/kotlin/dev/hossain/hangouts/model) sources. 
 
 The Google Hangouts JSON file can be optained via Google Takeout at https://takeout.google.com/settings/takeout
 
