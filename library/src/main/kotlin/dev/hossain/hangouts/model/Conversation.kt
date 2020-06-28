@@ -2,6 +2,7 @@ package dev.hossain.hangouts.model
 
 import com.squareup.moshi.JsonClass
 import dev.hossain.hangouts.model.message.Id
+import dev.hossain.hangouts.model.message.Participant
 import dev.hossain.hangouts.model.message.ReadState
 import dev.hossain.hangouts.model.message.UserChatId
 
@@ -35,6 +36,7 @@ data class Conversation(
     val otr_status: String,
     val otr_toggle: String,
     val current_participant: List<UserChatId>,
+    val participant_data: List<Participant>? = emptyList(),
     val fork_on_external_invite: Boolean,
     val network_type: List<String>,
     val force_history_state: String,
