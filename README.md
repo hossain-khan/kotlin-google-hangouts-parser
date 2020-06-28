@@ -9,7 +9,7 @@ See example below:
 
 ## Usage
 
-I am still experimenting with the takeout JSON data. However, here is how you would use it
+I am still experimenting with the takeout JSON data. However, here is how to use the library to parse the `Hangouts.json` file (use [JitPack.io](https://jitpack.io/#amardeshbd/kotlin-google-hangouts-parser) to add gradle dependency)
 
 
 ```kotlin
@@ -17,7 +17,7 @@ I am still experimenting with the takeout JSON data. However, here is how you wo
 
     val file = File("/path/to/hangouts.json")
 
-    val source = Okio.buffer(Okio.source(file))
+    val source: BufferedSource = Okio.buffer(Okio.source(file)) // Use buffer to read large file
     
     val hangoutsDocument: HangoutsDocument = Parser.parse(source)
     println("Completed processing - got ${hangoutsDocument.conversations.size} conversations.")
@@ -26,4 +26,5 @@ I am still experimenting with the takeout JSON data. However, here is how you wo
 
 ### Data Snapshot
 Here is a data snapshot taken from IntelliJ IDEA debugger.  
+
 ![](https://user-images.githubusercontent.com/99822/85952328-7a553b00-b936-11ea-80ca-4bb502382425.png)
