@@ -6,7 +6,10 @@ import com.squareup.moshi.JsonClass
  * ```
  * {
  *    "medium_type": "BABEL_MEDIUM" | "GOOGLE_VOICE_MEDIUM",
- *    "self_phone": { "e164": "+1234567890" }
+ *    "self_phone": {
+ *        "e164": "+1234567890",
+ *        "i18n_data": {...}
+ *    }
  * }
  * ```
  */
