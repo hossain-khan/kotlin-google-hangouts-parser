@@ -6,6 +6,7 @@ import com.squareup.moshi.JsonClass
  * ```
  * {
  *   "url": "https://maps.google.com/maps?q=23.0...63,-61.6....85",
+ *   "name": "Place Name",
  *   "representative_image": {
  *     "type": [
  *       "IMAGE_OBJECT_V2",
@@ -25,5 +26,6 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class EmbedThing(
     val url: String,
+    val name: String? = null,
     val representative_image: RepresentativeImage
 )

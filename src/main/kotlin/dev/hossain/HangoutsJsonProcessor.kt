@@ -22,5 +22,16 @@ object Processor {
 
         val hangoutsDocument: HangoutsDocument = adapter.fromJson(source)!!
         println("Completed processing - got ${hangoutsDocument.conversations.size} conversations.")
+
+        hangoutsDocument.conversations.stream().forEach {
+            it.events.stream().forEach { event ->
+                event.chat_message?.message_content?.attachment?.stream()?.forEach { attachment ->
+                    if(attachment.embed_item != null) {
+                        // Checks the attachments
+                        println(attachment.embed_item)
+                    }
+                }
+            }
+        }
     }
 }

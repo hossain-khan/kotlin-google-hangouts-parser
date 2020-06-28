@@ -6,12 +6,34 @@ import com.squareup.moshi.JsonClass
  * ```
  * {
  *   "url": "https://maps.google.com/maps?q=23.0..63,-61.6..85",
+ *   "name": "Place Name",
+ *   "address": {
+ *     "type": [
+ *       "POSTAL_ADDRESS_V2",
+ *       "THING_V2",
+ *       "THING"
+ *     ],
+ *     "postal_address_v2": {
+ *       "name": "Hamburg, NY 14075, United States",
+ *       "address_country": "United States",
+ *       "address_locality": "Hamburg",
+ *       "address_region": "New York",
+ *       "postal_code": "14075"
+ *     }
+ *   },
  *   "geo": {
+ *     "type": [
+ *       "GEO_COORDINATES_V2",
+ *       "THING_V2",
+ *       "THING"
+ *     ],
  *     "geo_coordinates_v2": {
  *       "latitude": 23.0...3,
  *       "longitude": -61.6...85
  *     }
  *   },
+ *   "cluster_id": "-3415...91",
+ *   "reference_id": "CnRqAAA....V0F1yAU0w80",
  *   "representative_image": {
  *     "type": [
  *       "IMAGE_OBJECT_V2",
@@ -31,7 +53,10 @@ import com.squareup.moshi.JsonClass
 @JsonClass(generateAdapter = true)
 data class EmbedPlace(
     val url: String,
+    val name: String? = null,
+    val cluster_id: String? = null,
+    val reference_id: String? = null,
+    val address: AddressContainer? = null,
     val geo: GeoData,
     val representative_image: RepresentativeImage
 )
-
