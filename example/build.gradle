@@ -1,6 +1,7 @@
 plugins {
     id 'java'
     id 'org.jetbrains.kotlin.jvm'
+    id 'org.jetbrains.kotlin.kapt'
 }
 
 group 'dev.hossain.hangouts'
@@ -13,6 +14,8 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation project(':library')
+    implementation("com.squareup.moshi:moshi:${rootProject.moshiVersion}")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:${rootProject.moshiVersion}")
 
     // Test Dependencies
     testCompile group: 'junit', name: 'junit', version: '4.12'

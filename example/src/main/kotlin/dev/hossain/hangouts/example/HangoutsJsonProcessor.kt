@@ -1,4 +1,4 @@
-package dev.hossain.hangouts
+package dev.hossain.hangouts.example
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
