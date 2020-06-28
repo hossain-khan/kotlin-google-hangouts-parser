@@ -1,4 +1,4 @@
-package dev.hossain.model
+package dev.hossain.hangouts.model
 
 import com.squareup.moshi.JsonClass
 import dev.hossain.hangouts.model.location.DeliveryMediumOption
