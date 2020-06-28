@@ -1,6 +1,7 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.kotlin.kapt'
+    id 'maven-publish'
 }
 
 group 'dev.hossain.hangouts'
@@ -8,6 +9,11 @@ version '1.0-SNAPSHOT'
 
 repositories {
     mavenCentral()
+}
+
+java {
+    withJavadocJar()
+    withSourcesJar()
 }
 
 dependencies {
@@ -21,4 +27,16 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+publishing { // https://docs.gradle.org/current/userguide/publishing_maven.html
+    publications {
+        maven(MavenPublication) {
+            groupId = 'dev.hossain.hangouts'
+            artifactId = 'json-parser'
+            version = '1.0-SNAPSHOT'
+
+            from components.java
+        }
+    }
 }
