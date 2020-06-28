@@ -1,6 +1,7 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
     id 'org.jetbrains.kotlin.kapt'
+    id 'maven'
     id 'maven-publish'
 }
 
@@ -14,6 +15,11 @@ repositories {
 java {
     withJavadocJar()
     withSourcesJar()
+}
+
+artifacts {
+    archives sourcesJar
+    archives javadocJar
 }
 
 dependencies {
