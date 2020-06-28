@@ -1,7 +1,6 @@
 package dev.hossain.hangouts.example
 
-import com.squareup.moshi.JsonAdapter
-import com.squareup.moshi.Moshi
+import dev.hossain.hangouts.Parser
 import dev.hossain.hangouts.model.HangoutsDocument
 import okio.Okio
 
@@ -17,12 +16,8 @@ object Processor {
 
         val source = Okio.buffer(Okio.source(inputStream))
 
-        val moshi = Moshi.Builder().build()
-        val adapter: JsonAdapter<HangoutsDocument> = moshi.adapter<HangoutsDocument>(HangoutsDocument::class.java)
-
-        val hangoutsDocument: HangoutsDocument = adapter.fromJson(source)!!
+        val hangoutsDocument: HangoutsDocument = Parser.parse(source)
         println("Completed processing - got ${hangoutsDocument.conversations.size} conversations.")
-
         hangoutsDocument.conversations.stream().forEach {
             it.events.stream().forEach { event ->
                 event.chat_message?.message_content?.attachment?.stream()?.forEach { attachment ->
