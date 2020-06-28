@@ -11,7 +11,7 @@ import dev.hossain.model.message.UserChatId
  *   "self_read_state": { ... },
  *   "status": "ACTIVE",
  *   "notification_level": "RING",
- *   "view": ["ARCHIVED_VIEW"],
+ *   "view": ["ARCHIVED_VIEW"| "INBOX_VIEW"],
  *   "inviter_id": { ... },
  *   "invite_timestamp": "1369539123372000",
  *   "sort_timestamp": "1369968040768557",
@@ -31,5 +31,6 @@ data class ConversationState(
     val invite_timestamp: String,
     val sort_timestamp: String,
     val active_timestamp: String? = null,
-    val delivery_medium_option: List<DeliveryMediumOption>
+    val delivery_medium_option: List<DeliveryMediumOption>,
+    val is_guest: Boolean = false
 )
