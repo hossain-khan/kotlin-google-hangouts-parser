@@ -1,5 +1,6 @@
 plugins {
     id 'org.jetbrains.kotlin.jvm'
+    id 'com.squareup.sqldelight'
 }
 
 group 'dev.hossain.hangouts'
@@ -11,6 +12,7 @@ repositories {
 
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
+    implementation "com.squareup.sqldelight:sqlite-driver:1.4.0"
 }
 
 compileKotlin {
@@ -18,4 +20,10 @@ compileKotlin {
 }
 compileTestKotlin {
     kotlinOptions.jvmTarget = "1.8"
+}
+
+sqldelight { // https://cashapp.github.io/sqldelight/jvm_sqlite/
+    Database { // This will be the name of the generated database class.
+        packageName = "dev.hossain.hangouts"
+    }
 }

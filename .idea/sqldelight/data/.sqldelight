@@ -1,0 +1,1 @@
+{"databases":[{"packageName":"dev.hossain.hangouts","compilationUnits":[{"name":"main","sourceFolders":[{"path":"src/main/sqldelight","dependency":false}]}],"outputDirectory":"build/generated/sqldelight/code/Database","className":"Database","dependencies":[],"dialectPreset":"SQLITE_3_18","deriveSchemaFromMigrations":false}]}
