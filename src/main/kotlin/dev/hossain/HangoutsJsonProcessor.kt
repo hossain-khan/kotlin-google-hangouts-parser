@@ -26,7 +26,7 @@ object Processor {
         hangoutsDocument.conversations.stream().forEach {
             it.events.stream().forEach { event ->
                 event.chat_message?.message_content?.attachment?.stream()?.forEach { attachment ->
-                    if(attachment.embed_item != null) {
+                    if (attachment.embed_item != null) {
                         // Checks the attachments
                         println(attachment.embed_item)
                     }
