@@ -39,7 +39,7 @@ object Processor {
             }
         }
         println("Total attachments used: $attachmentCount")
-        println("Total participants across all conversations (non-uniqueue): $participantsCount")
-        println("Total participants across all conversations (uniqueue): ${participantIds.size}")
+        println("Total participants across all conversations (non-unique): $participantsCount")
+        println("Total participants across all conversations (unique): ${participantIds.size}")
     }
 }
