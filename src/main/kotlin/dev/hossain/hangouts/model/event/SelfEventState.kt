@@ -1,7 +1,7 @@
-package dev.hossain.model.event
+package dev.hossain.hangouts.model.event
 
 import com.squareup.moshi.JsonClass
-import dev.hossain.model.message.UserChatId
+import dev.hossain.hangouts.model.message.UserChatId
 
 /***
  * ```

@@ -1,7 +1,7 @@
 package dev.hossain.model
 
 import com.squareup.moshi.JsonClass
-import dev.hossain.model.event.Event
+import dev.hossain.hangouts.model.event.Event
 
 /**
  * ```

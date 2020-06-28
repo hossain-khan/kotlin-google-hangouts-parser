@@ -1,7 +1,8 @@
-package dev.hossain.model
+package dev.hossain.hangouts.model
 
 import com.squareup.moshi.JsonClass
-import dev.hossain.model.event.Event
+import dev.hossain.hangouts.model.event.Event
+import dev.hossain.model.ConversationContainer
 
 /**
  * This is the root JSON document for the "Hangouts.json" file received from Google Takeout.

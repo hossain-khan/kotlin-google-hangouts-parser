@@ -1,4 +1,4 @@
-package dev.hossain.model.attachment
+package dev.hossain.hangouts.model.attachment
 
 import com.squareup.moshi.JsonClass
 

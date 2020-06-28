@@ -1,4 +1,4 @@
-package dev.hossain.model.message
+package dev.hossain.hangouts.model.message
 
 import com.squareup.moshi.JsonClass
 

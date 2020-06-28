@@ -1,7 +1,7 @@
-package dev.hossain.model.message
+package dev.hossain.hangouts.model.message
 
 import com.squareup.moshi.JsonClass
-import dev.hossain.model.attachment.EmbedItem
+import dev.hossain.hangouts.model.attachment.EmbedItem
 
 /**
  * ```

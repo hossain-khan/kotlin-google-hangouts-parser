@@ -1,8 +1,8 @@
-package dev.hossain.model.attachment
+package dev.hossain.hangouts.model.attachment
 
 import com.squareup.moshi.JsonClass
-import dev.hossain.model.location.AddressContainer
-import dev.hossain.model.location.GeoData
+import dev.hossain.hangouts.model.location.AddressContainer
+import dev.hossain.hangouts.model.location.GeoData
 
 /**
  * ```

@@ -1,4 +1,4 @@
-package dev.hossain.model.location
+package dev.hossain.hangouts.model.location
 
 import com.squareup.moshi.JsonClass
 

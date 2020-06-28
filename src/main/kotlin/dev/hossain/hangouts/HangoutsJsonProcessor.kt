@@ -1,8 +1,8 @@
-package dev.hossain
+package dev.hossain.hangouts
 
 import com.squareup.moshi.JsonAdapter
 import com.squareup.moshi.Moshi
-import dev.hossain.model.HangoutsDocument
+import dev.hossain.hangouts.model.HangoutsDocument
 import okio.Okio
 
 

@@ -1,9 +1,9 @@
 package dev.hossain.model
 
 import com.squareup.moshi.JsonClass
-import dev.hossain.model.message.Id
-import dev.hossain.model.message.ReadState
-import dev.hossain.model.message.UserChatId
+import dev.hossain.hangouts.model.message.Id
+import dev.hossain.hangouts.model.message.ReadState
+import dev.hossain.hangouts.model.message.UserChatId
 
 /**
  * Example Data
