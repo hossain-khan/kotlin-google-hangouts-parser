@@ -1,6 +1,9 @@
 package dev.hossain.model
 
 import com.squareup.moshi.JsonClass
+import dev.hossain.model.location.DeliveryMediumOption
+import dev.hossain.model.message.ReadState
+import dev.hossain.model.message.UserChatId
 
 /**
  * ```

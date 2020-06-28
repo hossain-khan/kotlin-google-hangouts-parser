@@ -1,4 +1,4 @@
-package dev.hossain.model
+package dev.hossain.model.attachment
 
 import com.squareup.moshi.JsonClass
 
@@ -6,10 +6,14 @@ import com.squareup.moshi.JsonClass
  * ```
  * {
  *  "url": "https://maps.googleapis.com/maps/api/staticmap?center=23.0....85,-61.6....91"
+ *  "width": "640",
+ *  "height": "640"
  * }
  * ```
  */
 @JsonClass(generateAdapter = true)
-data class Url(
-    val url: String
+data class ImageObject(
+    val url: String,
+    val width: String? = null,
+    val height: String? = null
 )

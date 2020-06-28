@@ -1,4 +1,4 @@
-package dev.hossain.model
+package dev.hossain.model.attachment
 
 import com.squareup.moshi.JsonClass
 
