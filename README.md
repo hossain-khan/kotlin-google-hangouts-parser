@@ -9,7 +9,7 @@ See example below:
 
 ## Usage
 
-I am still experimenting with the takeout JSON data. However, here is how you would use it
+I am still experimenting with the takeout JSON data. However, here is how to use (use [JitPack.io](https://jitpack.io/#amardeshbd/kotlin-google-hangouts-parser) to add gradle dependency)
 
 
 ```kotlin
