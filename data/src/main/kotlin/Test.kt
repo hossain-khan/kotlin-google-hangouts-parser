@@ -4,6 +4,12 @@ import dev.hossain.hangouts.Database
 import hangouts.data.Conversation
 import hangouts.data.ConversationQueries
 
+/**
+ * Testing database classes.
+ *
+ * See https://cashapp.github.io/sqldelight/jvm_sqlite/
+ * Also see `example` module with sample code that uses this database.
+ */
 fun main() {
     val driver: SqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
     Database.Schema.create(driver)
@@ -16,19 +22,5 @@ fun main() {
     )
 
     val conversationQueries: ConversationQueries = database.conversationQueries
-
-    println(conversationQueries.selectAll().executeAsList())
-
-    val timestamp = System.currentTimeMillis()
-    conversationQueries.insert(
-        id = "id$timestamp",
-        type = "type",
-        invite_timestamp = "$timestamp",
-        sort_timestamp = "$timestamp",
-        active_timestamp = "$timestamp",
-        inviter_gaia_id = "inviter_gaia_id$timestamp",
-        network_type = listOf("BABEL"),
-        status = "status"
-    )
     println(conversationQueries.selectAll().executeAsList())
 }
