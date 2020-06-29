@@ -1,3 +1,6 @@
+/**
+ * Chat message inside chat event.
+ */
 CREATE TABLE "chat_message" (
 	"id"						INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	"type"						TEXT NOT NULL,

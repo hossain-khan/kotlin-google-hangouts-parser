@@ -1,3 +1,6 @@
+/**
+ * Main conversation item that contains chat events among 2 or more participants.
+ */
 CREATE TABLE "conversation" (
 	"id"				TEXT NOT NULL UNIQUE ON CONFLICT REPLACE,
 	"type"				TEXT,

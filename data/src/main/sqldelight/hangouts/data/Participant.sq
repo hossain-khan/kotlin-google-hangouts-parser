@@ -1,3 +1,6 @@
+/**
+ * All the participants the user has in the `Hangouts.json` snapshot.
+ */
 CREATE TABLE "participant" (
 	"gaia_id"								TEXT NOT NULL UNIQUE ON CONFLICT REPLACE,
 	"fallback_name"							TEXT,

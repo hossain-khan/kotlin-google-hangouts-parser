@@ -1,3 +1,6 @@
+/**
+ * Chat event containing chat information. It can be text message or SMS or picture.
+ */
 CREATE TABLE "chat_event" (
 	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
 	"event_id"			TEXT,
