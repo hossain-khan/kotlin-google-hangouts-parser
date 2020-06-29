@@ -10,6 +10,7 @@ import dev.hossain.hangouts.model.message.UserChatId
  *      "gaia_id": "107431117",
  *      "chat_id": "107431117"
  *  },
+ *  "client_generated_id": "136...97",
  *  "notification_level": "RING"
  * }
  * ```

@@ -1,0 +1,10 @@
+CREATE TABLE "chat_event" (
+	"id"	INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"event_id"			TEXT,
+	"conversation_id"	TEXT NOT NULL,
+	"sender_gaia_id"	TEXT NOT NULL,
+	"timestamp"			TEXT NOT NULL,
+	"delivery_medium"	TEXT,
+	"event_type"		TEXT,
+	"event_version"		TEXT
+);

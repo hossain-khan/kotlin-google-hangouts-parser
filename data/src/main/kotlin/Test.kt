@@ -19,6 +19,16 @@ fun main() {
 
     println(conversationQueries.selectAll().executeAsList())
 
-    conversationQueries.insert(id = "newid", type = "TEXT", network_type = listOf("BABEL"))
+    val timestamp = System.currentTimeMillis()
+    conversationQueries.insert(
+        id = "id$timestamp",
+        type = "type",
+        invite_timestamp = "$timestamp",
+        sort_timestamp = "$timestamp",
+        active_timestamp = "$timestamp",
+        inviter_gaia_id = "inviter_gaia_id$timestamp",
+        network_type = listOf("BABEL"),
+        status = "status"
+    )
     println(conversationQueries.selectAll().executeAsList())
 }

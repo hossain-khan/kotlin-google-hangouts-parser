@@ -1,14 +1,29 @@
-CREATE TABLE conversation (
-  id TEXT NOT NULL PRIMARY KEY,
-  type TEXT NOT NULL,
-  network_type TEXT AS kotlin.collections.List<String> NOT NULL
+CREATE TABLE "conversation" (
+	"id"				TEXT NOT NULL UNIQUE,
+	"type"				TEXT,
+	"invite_timestamp"	TEXT NOT NULL,
+	"sort_timestamp"	TEXT NOT NULL,
+	"active_timestamp"	TEXT,
+	"inviter_gaia_id"	TEXT NOT NULL,
+	"network_type"		TEXT AS kotlin.collections.List<String> NOT NULL,
+	"status"			TEXT,
+	"is_guest"			INTEGER NOT NULL DEFAULT 0,
+	PRIMARY KEY("id")
 );
-
 
 selectAll:
 SELECT *
 FROM conversation;
 
 insert:
-INSERT INTO conversation(id, type, network_type)
-VALUES (?, ?, ?);
+INSERT INTO conversation(
+    "id",
+    "type",
+    "invite_timestamp",
+    "sort_timestamp",
+    "active_timestamp",
+    "inviter_gaia_id",
+    "network_type",
+    "status"
+)
+VALUES (?, ?, ?, ?, ?, ?, ?, ?);

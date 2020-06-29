@@ -1,0 +1,12 @@
+CREATE TABLE "participant" (
+	"gaia_id"								TEXT NOT NULL UNIQUE ON CONFLICT REPLACE,
+	"fallback_name"							TEXT,
+	"invitation_status"						TEXT NOT NULL,
+	"participant_type"						TEXT,
+	"domain_id"								TEXT,
+	"in_different_customer_as_requester"	INTEGER NOT NULL,
+	"phone_number"							TEXT,
+	"phone_is_valid"						INTEGER DEFAULT 0,
+	"phone_validation_result"				TEXT,
+	PRIMARY KEY("gaia_id")
+);
