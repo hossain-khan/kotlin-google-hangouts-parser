@@ -1,5 +1,5 @@
 CREATE TABLE "participant" (
-	"gaia_id"								TEXT NOT NULL UNIQUE,
+	"gaia_id"								TEXT NOT NULL UNIQUE ON CONFLICT REPLACE,
 	"fallback_name"							TEXT,
 	"invitation_status"						TEXT NOT NULL,
 	"participant_type"						TEXT,

@@ -62,8 +62,12 @@ object Processor {
         println(conversationQueries.selectAll().executeAsList())
     }
 
-    fun buildDataBase(): Database {
-        val driver: SqlDriver = JdbcSqliteDriver(JdbcSqliteDriver.IN_MEMORY)
+    /**
+     * Builds the Database
+     * https://cashapp.github.io/sqldelight/
+     */
+    private fun buildDataBase(): Database {
+        val driver: SqlDriver = JdbcSqliteDriver("${JdbcSqliteDriver.IN_MEMORY}/tmp/hangouts-db.sqlite")
         Database.Schema.create(driver)
 
         val database = Database(
