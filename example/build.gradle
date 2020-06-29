@@ -14,8 +14,10 @@ repositories {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation project(':library')
+    implementation project(':data')
     implementation("com.squareup.moshi:moshi:${rootProject.moshiVersion}")
     kapt("com.squareup.moshi:moshi-kotlin-codegen:${rootProject.moshiVersion}")
+    implementation "com.squareup.sqldelight:sqlite-driver:1.4.0"
 
     // Test Dependencies
     testCompile group: 'junit', name: 'junit', version: '4.12'
