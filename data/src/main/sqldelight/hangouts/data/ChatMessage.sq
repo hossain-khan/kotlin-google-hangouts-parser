@@ -1,0 +1,9 @@
+CREATE TABLE "chat_message" (
+	"id"						INTEGER NOT NULL PRIMARY KEY AUTOINCREMENT,
+	"type"						TEXT NOT NULL,
+	"text"						TEXT,
+	"formatting_bold"			INTEGER NOT NULL DEFAULT 0,
+	"formatting_italics"		INTEGER NOT NULL DEFAULT 0,
+	"formatting_strikethrough"	INTEGER NOT NULL DEFAULT 0,
+	"formatting_underline"		INTEGER NOT NULL DEFAULT 0
+);
