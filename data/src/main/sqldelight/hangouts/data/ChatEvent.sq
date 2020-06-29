@@ -8,3 +8,13 @@ CREATE TABLE "chat_event" (
 	"event_type"		TEXT,
 	"event_version"		TEXT
 );
+
+
+insertChatEvent:
+INSERT INTO chat_event
+VALUES ?;
+
+count:
+SELECT COUNT(id) AS count
+FROM chat_event
+WHERE 1;

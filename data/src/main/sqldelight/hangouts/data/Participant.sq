@@ -10,3 +10,12 @@ CREATE TABLE "participant" (
 	"phone_validation_result"				TEXT,
 	PRIMARY KEY("gaia_id")
 );
+
+insertParticipant:
+INSERT INTO participant
+VALUES ?;
+
+count:
+SELECT COUNT(gaia_id) AS count
+FROM participant
+WHERE 1;

@@ -1,5 +1,5 @@
 CREATE TABLE "conversation" (
-	"id"				TEXT NOT NULL UNIQUE,
+	"id"				TEXT NOT NULL UNIQUE ON CONFLICT REPLACE,
 	"type"				TEXT,
 	"invite_timestamp"	TEXT NOT NULL,
 	"sort_timestamp"	TEXT NOT NULL,
@@ -15,15 +15,11 @@ selectAll:
 SELECT *
 FROM conversation;
 
-insert:
-INSERT INTO conversation(
-    "id",
-    "type",
-    "invite_timestamp",
-    "sort_timestamp",
-    "active_timestamp",
-    "inviter_gaia_id",
-    "network_type",
-    "status"
-)
-VALUES (?, ?, ?, ?, ?, ?, ?, ?);
+insertConversation:
+INSERT INTO conversation
+VALUES ?;
+
+count:
+SELECT COUNT(id) AS count
+FROM conversation
+WHERE 1;

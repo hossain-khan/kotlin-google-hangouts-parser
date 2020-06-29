@@ -7,3 +7,13 @@ CREATE TABLE "chat_message" (
 	"formatting_strikethrough"	INTEGER NOT NULL DEFAULT 0,
 	"formatting_underline"		INTEGER NOT NULL DEFAULT 0
 );
+
+
+insertChatMessage:
+INSERT INTO chat_message
+VALUES ?;
+
+count:
+SELECT COUNT(id) AS count
+FROM chat_message
+WHERE 1;
