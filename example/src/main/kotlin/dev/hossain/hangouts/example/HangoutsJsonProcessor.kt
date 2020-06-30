@@ -1,6 +1,9 @@
 package dev.hossain.hangouts.example
 
 import StringListColumnAdapter
+import com.jakewharton.picnic.TextAlignment
+import com.jakewharton.picnic.renderText
+import com.jakewharton.picnic.table
 import com.squareup.sqldelight.db.SqlDriver
 import com.squareup.sqldelight.sqlite.driver.JdbcSqliteDriver
 import dev.hossain.hangouts.Database
@@ -44,14 +47,11 @@ object Processor {
         val database = buildDataBase(File("/tmp/hangouts-db-temp.sqlite"))
         addConversations(database, hangoutsDocument.conversations)
 
-        // TODO - Use database to get these metrics
-        var attachmentCount = 0
-        var participantsCount = database.participantQueries.count().executeAsOne()
-        println("Total attachments used: $attachmentCount")
-        println("Total participants across all conversations: $participantsCount")
+        // After DB is created and populated, show stats.
+        printStatistics(database)
     }
 
-    fun addConversations(database: Database, conversations: List<ConversationContainer>) {
+    private fun addConversations(database: Database, conversations: List<ConversationContainer>) {
         println("Begin adding data to database. For 100MB file, it may take 2-5 minutes... hang tight!!!")
         val conversationQueries: ConversationQueries = database.conversationQueries
 
@@ -156,6 +156,87 @@ object Processor {
             )
         )
         return database
+    }
+
+    private fun printStatistics(database: Database) {
+        val conversationQueries = database.conversationQueries
+        val participantQueries = database.participantQueries
+        val chatMessageQueries = database.chatMessageQueries
+
+        val tableText = table {
+            cellStyle {
+                border = true
+                alignment = TextAlignment.TopCenter
+                paddingLeft = 2
+                paddingRight = 2
+            }
+
+            // ------------------------------------
+            // Stats for all conversation/threads
+            // -----------------------------------
+            row {
+                cell("Conversation") {
+                    rowSpan = 3
+                    alignment = TextAlignment.MiddleCenter
+                }
+                cell("Total") { alignment = TextAlignment.MiddleRight }
+                cell(conversationQueries.count().executeAsOne())
+            }
+            row {
+                cell("Group Conversation") { alignment = TextAlignment.MiddleRight }
+                cell(conversationQueries.countType("GROUP").executeAsOne())
+            }
+            row {
+                cell("One-to-one Thread") { alignment = TextAlignment.MiddleRight }
+                cell(conversationQueries.countType("STICKY_ONE_TO_ONE").executeAsOne())
+            }
+
+            // ------------------------------
+            // Stats for all participants
+            // ------------------------------
+            row {
+                cell("Participants") {
+                    rowSpan = 3
+                    alignment = TextAlignment.MiddleCenter
+                }
+                cell("Total") { alignment = TextAlignment.MiddleRight }
+                cell(participantQueries.count().executeAsOne())
+            }
+            row {
+                cell("Google Users") { alignment = TextAlignment.MiddleRight }
+                cell(participantQueries.countType("GAIA").executeAsOne())
+            }
+            row {
+                cell("Non-Google (SMS)") { alignment = TextAlignment.MiddleRight }
+                cell(participantQueries.countType("OFF_NETWORK_PHONE").executeAsOne())
+            }
+
+            // ------------------------------
+            // Stats for all chat messages
+            // ------------------------------
+            row {
+                cell("Chat Message") {
+                    rowSpan = 4
+                    alignment = TextAlignment.MiddleCenter
+                }
+                cell("Total") { alignment = TextAlignment.MiddleRight }
+                cell(chatMessageQueries.count().executeAsOne())
+            }
+            row {
+                cell("Text Messages") { alignment = TextAlignment.MiddleRight }
+                cell(chatMessageQueries.countMessageType("TEXT").executeAsOne())
+            }
+            row {
+                cell("Web URL Messages") { alignment = TextAlignment.MiddleRight }
+                cell(chatMessageQueries.countMessageType("LINK").executeAsOne())
+            }
+            row {
+                cell("Longest Message Chars") { alignment = TextAlignment.MiddleRight }
+                cell(chatMessageQueries.maxMessageLength().executeAsOne().max_length)
+            }
+        }.renderText()
+
+        println(tableText)
     }
 }
 
