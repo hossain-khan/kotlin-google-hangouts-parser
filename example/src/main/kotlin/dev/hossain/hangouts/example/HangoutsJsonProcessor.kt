@@ -7,8 +7,9 @@ import dev.hossain.hangouts.Database
 import dev.hossain.hangouts.Parser
 import dev.hossain.hangouts.model.ConversationContainer
 import dev.hossain.hangouts.model.HangoutsDocument
+import dev.hossain.hangouts.model.event.Event
+import dev.hossain.hangouts.model.message.ChatMessageSegment
 import dev.hossain.hangouts.model.message.Participant
-import hangouts.data.Conversation
 import hangouts.data.ConversationQueries
 import hangouts.data.ParticipantQueries
 import okio.Okio
@@ -17,11 +18,20 @@ import kotlin.system.measureTimeMillis
 
 fun main() {
     println("Begin Processing Hangouts Json ...")
+
+    // Assumes file is in `example/src/main/resources/` directory.
     Processor.processTakeoutFile("/hangouts.json")
 }
 
+/**
+ * Uses combination of [Parser] and [Database] to import parsed data into data base for data analysis.
+ */
 object Processor {
+    /**
+     * Parsed Hangouts JSON document containing conversation and related infos.
+     */
     private lateinit var hangoutsDocument: HangoutsDocument
+
     fun processTakeoutFile(path: String) {
         val inputStream = Processor::class.java.getResourceAsStream(path)
 
@@ -46,7 +56,7 @@ object Processor {
         conversations.forEach { container ->
             container.conversation?.conversation?.let { conversation ->
                 conversationQueries.insertConversation(
-                    Conversation(
+                    hangouts.data.Conversation(
                         id = conversation.id.id,
                         type = conversation.type,
                         invite_timestamp = conversation.self_conversation_state.invite_timestamp,
@@ -63,10 +73,49 @@ object Processor {
                     addParticipants(database, it)
                 }
             }
+
+            // For each conversation, there is list of chat events containing text or picture message and so on
+            addConversationEvents(database, container.events)
         }
 
 
         println(conversationQueries.selectAll().executeAsList())
+    }
+
+    private fun addConversationEvents(database: Database, conversationEvents: List<Event>) {
+        val queries = database.chatEventQueries
+        conversationEvents.forEach { event ->
+            queries.insert(
+                event_id = event.event_id,
+                conversation_id = event.conversation_id.id,
+                sender_gaia_id = event.sender_id.gaia_id,
+                timestamp = event.timestamp,
+                delivery_medium = event.delivery_medium?.medium_type,
+                event_type = event.event_type,
+                event_version = event.event_version
+            )
+
+            // Chat event can be of type TEXT, in that case we want to save the chat message
+            val chatSegments = event.chat_message?.message_content?.segment
+            if (event.event_id != null && chatSegments != null) {
+                addChatMessages(database, event.event_id!!, chatSegments)
+            }
+        }
+    }
+
+    private fun addChatMessages(database: Database, eventId: String, chatSegments: List<ChatMessageSegment>) {
+        val queries = database.chatMessageQueries
+
+        chatSegments.forEach { chatMessage ->
+            queries.insert(
+                type = chatMessage.type,
+                text = chatMessage.text,
+                formatting_bold = chatMessage.formatting?.bold.toSqlBoolean(),
+                formatting_italics = chatMessage.formatting?.italics.toSqlBoolean(),
+                formatting_strikethrough = chatMessage.formatting?.strikethrough.toSqlBoolean(),
+                formatting_underline = chatMessage.formatting?.underline.toSqlBoolean()
+            )
+        }
     }
 
     private fun addParticipants(database: Database, participants: List<Participant>) {
@@ -99,7 +148,7 @@ object Processor {
 
         val database = Database(
             driver = driver,
-            conversationAdapter = Conversation.Adapter(
+            conversationAdapter = hangouts.data.Conversation.Adapter(
                 network_typeAdapter = StringListColumnAdapter()
             )
         )

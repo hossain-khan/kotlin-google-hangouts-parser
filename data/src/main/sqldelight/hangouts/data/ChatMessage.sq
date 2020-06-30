@@ -11,10 +11,19 @@ CREATE TABLE "chat_message" (
 	"formatting_underline"		INTEGER NOT NULL DEFAULT 0
 );
 
-
+/**
+ * Allows to insert chat message data object.
+ */
 insertChatMessage:
 INSERT INTO chat_message
 VALUES ?;
+
+/**
+ * Inserts a chat message with all required params allowing it to auto-generate the row ID.
+ */
+insert:
+INSERT INTO chat_message(type, text, formatting_bold, formatting_italics, formatting_strikethrough, formatting_underline)
+VALUES (?, ?, ?, ?, ?, ?);
 
 count:
 SELECT COUNT(id) AS count

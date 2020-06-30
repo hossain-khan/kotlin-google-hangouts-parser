@@ -17,6 +17,15 @@ insertChatEvent:
 INSERT INTO chat_event
 VALUES ?;
 
+/**
+ * Inserts a chat event with all required params allowing it to auto-generate the row ID.
+ */
+insert:
+INSERT INTO chat_event(event_id, conversation_id, sender_gaia_id, timestamp, delivery_medium, event_type, event_version)
+VALUES (?, ?, ?, ?, ?, ?, ?);
+
+
+
 count:
 SELECT COUNT(id) AS count
 FROM chat_event
