@@ -13,6 +13,7 @@ import dev.hossain.hangouts.model.message.Participant
 import hangouts.data.ConversationQueries
 import hangouts.data.ParticipantQueries
 import okio.Okio
+import java.io.File
 import kotlin.system.measureTimeMillis
 
 
@@ -40,7 +41,7 @@ object Processor {
         val parseTime = measureTimeMillis { hangoutsDocument = Parser.parse(source) }
         println("Completed processing - got ${hangoutsDocument.conversations.size} conversations in ${parseTime}ms.")
 
-        val database = buildDataBase()
+        val database = buildDataBase(File("/tmp/hangouts-db-temp.sqlite"))
         addConversations(database, hangoutsDocument.conversations)
 
         // TODO - Use database to get these metrics
@@ -51,6 +52,7 @@ object Processor {
     }
 
     fun addConversations(database: Database, conversations: List<ConversationContainer>) {
+        println("Begin adding data to database. For 100MB file, it may take 2-5 minutes... hang tight!!!")
         val conversationQueries: ConversationQueries = database.conversationQueries
 
         conversations.forEach { container ->
@@ -77,9 +79,6 @@ object Processor {
             // For each conversation, there is list of chat events containing text or picture message and so on
             addConversationEvents(database, container.events)
         }
-
-
-        println(conversationQueries.selectAll().executeAsList())
     }
 
     private fun addConversationEvents(database: Database, conversationEvents: List<Event>) {
@@ -98,17 +97,20 @@ object Processor {
             // Chat event can be of type TEXT, in that case we want to save the chat message
             val chatSegments = event.chat_message?.message_content?.segment
             if (event.event_id != null && chatSegments != null) {
-                addChatMessages(database, event.event_id!!, chatSegments)
+                addChatMessages(database, event, chatSegments)
             }
         }
     }
 
-    private fun addChatMessages(database: Database, eventId: String, chatSegments: List<ChatMessageSegment>) {
+    private fun addChatMessages(database: Database, event: Event, chatSegments: List<ChatMessageSegment>) {
         val queries = database.chatMessageQueries
 
         chatSegments.forEach { chatMessage ->
             queries.insert(
+                conversation_id = event.conversation_id.id,
+                chat_event_id = event.event_id!!,
                 type = chatMessage.type,
+                timestamp = event.timestamp,
                 text = chatMessage.text,
                 formatting_bold = chatMessage.formatting?.bold.toSqlBoolean(),
                 formatting_italics = chatMessage.formatting?.italics.toSqlBoolean(),
@@ -142,8 +144,9 @@ object Processor {
      * Builds the Database
      * https://cashapp.github.io/sqldelight/
      */
-    private fun buildDataBase(): Database {
-        val driver: SqlDriver = JdbcSqliteDriver("${JdbcSqliteDriver.IN_MEMORY}/tmp/hangouts-db.sqlite")
+    private fun buildDataBase(dbPath: File): Database {
+        println("Creating database file at: ${dbPath.absolutePath}")
+        val driver: SqlDriver = JdbcSqliteDriver("${JdbcSqliteDriver.IN_MEMORY}${dbPath.absolutePath}")
         Database.Schema.create(driver)
 
         val database = Database(
