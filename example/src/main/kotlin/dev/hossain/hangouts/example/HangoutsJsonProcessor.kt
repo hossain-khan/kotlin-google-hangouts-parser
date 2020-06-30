@@ -17,9 +17,12 @@ import hangouts.data.ConversationQueries
 import hangouts.data.ParticipantQueries
 import okio.Okio
 import java.io.File
+import java.util.concurrent.TimeUnit
 import kotlin.system.measureTimeMillis
 
-
+/**
+ * Main function to initiate the data parsing and database creation.
+ */
 fun main() {
     println("Begin Processing Hangouts Json ...")
 
@@ -44,14 +47,16 @@ object Processor {
         val parseTime = measureTimeMillis { hangoutsDocument = Parser.parse(source) }
         println("Completed processing - got ${hangoutsDocument.conversations.size} conversations in ${parseTime}ms.")
 
-        val database = buildDataBase(File("/tmp/hangouts-db-temp.sqlite"))
-        addConversations(database, hangoutsDocument.conversations)
+        val database = buildDataBase(File("/tmp/hangouts-db-temp-${System.currentTimeMillis()}.sqlite"))
+        val dataInsertTime = measureTimeMillis { populateDatabase(database, hangoutsDocument.conversations) }
+
+        println("Completed inserting data in ${TimeUnit.MILLISECONDS.toSeconds(dataInsertTime)} seconds.")
 
         // After DB is created and populated, show stats.
         printStatistics(database)
     }
 
-    private fun addConversations(database: Database, conversations: List<ConversationContainer>) {
+    private fun populateDatabase(database: Database, conversations: List<ConversationContainer>) {
         println("Begin adding data to database. For 100MB file, it may take 2-5 minutes... hang tight!!!")
         val conversationQueries: ConversationQueries = database.conversationQueries
 

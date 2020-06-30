@@ -13,7 +13,7 @@ I am still experimenting with the takeout JSON data. However, here is how to use
 
 
 ```kotlin
-// import dev.hossain.hangouts.Parser
+// import dev.hossain.hangouts.Parser (also see `HangoutsJsonProcessor.kt` for sample usage)
 
     val file = File("/path/to/hangouts.json")
 
@@ -28,3 +28,34 @@ I am still experimenting with the takeout JSON data. However, here is how to use
 Here is a data snapshot taken from IntelliJ IDEA debugger.  
 
 ![](https://user-images.githubusercontent.com/99822/85952328-7a553b00-b936-11ea-80ca-4bb502382425.png)
+
+
+### SQLite Database
+The example project creates a SQLite database using SQLDelight found in [`data`](https://github.com/amardeshbd/kotlin-google-hangouts-parser/tree/master/data/src/main/sqldelight/hangouts/data) module. 
+See [HangoutsJsonProcessor.kt](https://github.com/amardeshbd/kotlin-google-hangouts-parser/blob/master/example/src/main/kotlin/dev/hossain/hangouts/example/HangoutsJsonProcessor.kt) for details.
+
+Here is sample snapshot of output from the `HangoutsJsonProcessor.kt`.
+
+```
+┌────────────────┬─────────────────────────┬──────────┐
+│                │                  Total  │   417    │
+│                ├─────────────────────────┼──────────┤
+│  Conversation  │     Group Conversation  │    41    │
+│                ├─────────────────────────┼──────────┤
+│                │      One-to-one Thread  │   376    │
+├────────────────┼─────────────────────────┼──────────┤
+│                │                  Total  │   435    │
+│                ├─────────────────────────┼──────────┤
+│  Participants  │           Google Users  │   112    │
+│                ├─────────────────────────┼──────────┤
+│                │       Non-Google (SMS)  │   323    │
+├────────────────┼─────────────────────────┼──────────┤
+│                │                  Total  │  176932  │
+│                ├─────────────────────────┼──────────┤
+│                │          Text Messages  │  168733  │
+│  Chat Message  ├─────────────────────────┼──────────┤
+│                │       Web URL Messages  │   3741   │
+│                ├─────────────────────────┼──────────┤
+│                │  Longest Message Chars  │   1446   │
+└────────────────┴─────────────────────────┴──────────┘
+```
