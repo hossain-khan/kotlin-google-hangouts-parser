@@ -20,7 +20,7 @@ import dev.hossain.hangouts.model.message.UserChatId
  *   "current_participant": [ {...}, {...} ],
  *   "participant_data": [ {...} ],
  *   "fork_on_external_invite": false,
- *   "network_type": [ "BABEL" ],
+ *   "network_type": [ "BABEL" | "PHONE" ],
  *   "force_history_state": "NO_FORCE",
  *   "group_link_sharing_status": "LINK_SHARING_OFF"
  * }
@@ -38,6 +38,11 @@ data class Conversation(
     val current_participant: List<UserChatId>,
     val participant_data: List<Participant>? = emptyList(),
     val fork_on_external_invite: Boolean,
+    /**
+     * Usually it's one or the other (even though it's a list).
+     * - BABEL
+     * - PHONE
+     */
     val network_type: List<String>,
     val force_history_state: String,
     val group_link_sharing_status: String

@@ -40,6 +40,15 @@ data class Event(
     val advances_sort_timestamp: Boolean? = null,
     val event_otr: String? = null,
     val delivery_medium: DeliveryMedium? = null,
+    /**
+     * - HANGOUT_EVENT
+     * - REGULAR_CHAT_MESSAGE
+     * - REMOVE_USER
+     * - RENAME_CONVERSATION
+     * - ADD_USER
+     * - SMS
+     * - VOICEMAIL
+     */
     val event_type: String? = null,
     val event_version: String? = null
 )
