@@ -33,3 +33,16 @@ count:
 SELECT COUNT(id) AS count
 FROM chat_message
 WHERE 1;
+
+countMessageType:
+SELECT COUNT(id) AS count
+FROM chat_message
+WHERE chat_message.type = ?;
+
+/**
+ * Provides maximum message length from chat message.
+ */
+maxMessageLength:
+SELECT MAX(LENGTH(chat_message.text)) AS max_length
+FROM chat_message
+WHERE 1;

@@ -29,6 +29,10 @@ import dev.hossain.hangouts.model.message.UserChatId
 @JsonClass(generateAdapter = true)
 data class Conversation(
     val id: Id,
+    /**
+     * - GROUP
+     * - STICKY_ONE_TO_ONE
+     */
     val type: String,
     val self_conversation_state: ConversationState,
     val read_state: List<ReadState> = emptyList(),

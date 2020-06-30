@@ -26,3 +26,8 @@ count:
 SELECT COUNT(id) AS count
 FROM conversation
 WHERE 1;
+
+countType:
+SELECT COUNT(id) AS count
+FROM conversation
+WHERE conversation.type=?;

@@ -22,3 +22,8 @@ count:
 SELECT COUNT(gaia_id) AS count
 FROM participant
 WHERE 1;
+
+countType:
+SELECT COUNT(gaia_id) AS count
+FROM participant
+WHERE participant.participant_type=?;
