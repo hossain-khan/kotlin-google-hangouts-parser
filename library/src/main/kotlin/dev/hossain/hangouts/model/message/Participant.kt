@@ -32,8 +32,16 @@ import dev.hossain.hangouts.model.location.Phone
 data class Participant(
     val id: UserChatId,
     val fallback_name: String? = null,
+    /**
+     * - ACCEPTED_INVITATION
+     * - PENDING_INVITATION
+     */
     val invitation_status: String,
     val new_invitation_status: String? = null,
+    /**
+     * - GAIA
+     * - OFF_NETWORK_PHONE
+     */
     val participant_type: String? = null,
     val domain_id: String? = null,
     val in_different_customer_as_requester: Boolean? = null,
