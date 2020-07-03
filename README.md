@@ -61,3 +61,5 @@ Here is sample snapshot of output from the `HangoutsJsonProcessor.kt`.
 │                │  Longest Message Chars  │   1446   │
 └────────────────┴─────────────────────────┴──────────┘
 ```
+
+![Google Sheets Generated Charts](https://user-images.githubusercontent.com/99822/86421294-80854780-bca7-11ea-969d-6980def9b3cd.png)
