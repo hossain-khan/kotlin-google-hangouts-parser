@@ -1,3 +1,5 @@
+![Kotlin-hangouts-parser](https://user-images.githubusercontent.com/99822/86419839-8a587c00-bca2-11ea-9bb2-3406bf5c2601.jpg)
+
 # Google Hangouts JSON Parser
 Contains JSON model classes using [Moshi](https://github.com/square/moshi) JSON parser. See [JSON model classes](https://github.com/amardeshbd/kotlin-google-hangouts-parser/tree/master/library/src/main/kotlin/dev/hossain/hangouts/model) sources. 
 
