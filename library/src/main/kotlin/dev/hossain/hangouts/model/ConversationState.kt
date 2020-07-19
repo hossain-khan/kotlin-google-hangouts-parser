@@ -25,7 +25,7 @@ import dev.hossain.hangouts.model.message.UserChatId
 data class ConversationState(
     val self_read_state: ReadState,
     val status: String,
-    val notification_level: String,
+    val notification_level: String?,
     val view: List<String>,
     val inviter_id: UserChatId,
     val invite_timestamp: String,
