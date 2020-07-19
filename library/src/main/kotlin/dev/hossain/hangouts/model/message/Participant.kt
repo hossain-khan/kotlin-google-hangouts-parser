@@ -36,7 +36,7 @@ data class Participant(
      * - ACCEPTED_INVITATION
      * - PENDING_INVITATION
      */
-    val invitation_status: String,
+    val invitation_status: String? = null,
     val new_invitation_status: String? = null,
     /**
      * - GAIA

@@ -4,7 +4,7 @@
 CREATE TABLE "participant" (
 	"gaia_id"								TEXT NOT NULL UNIQUE ON CONFLICT REPLACE,
 	"fallback_name"							TEXT,
-	"invitation_status"						TEXT NOT NULL,
+	"invitation_status"						TEXT,
 	"participant_type"						TEXT,
 	"domain_id"								TEXT,
 	"in_different_customer_as_requester"	INTEGER NOT NULL,
