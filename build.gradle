@@ -23,7 +23,7 @@ repositories {
 }
 
 ext {
-    moshiVersion = '1.9.3'
+    moshiVersion = '1.15.1'
 }
 
 dependencies {
