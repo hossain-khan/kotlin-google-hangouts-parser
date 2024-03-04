@@ -21,7 +21,7 @@ dependencies {
 
     // HTML-like tables which can be rendered to text.
     // https://github.com/JakeWharton/picnic#readme
-    implementation("com.jakewharton.picnic:picnic:0.3.1")
+    implementation("com.jakewharton.picnic:picnic:0.7.0")
 
     // Test Dependencies
     testCompile group: 'junit', name: 'junit', version: '4.13.2'
