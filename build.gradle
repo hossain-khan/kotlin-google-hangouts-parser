@@ -29,7 +29,7 @@ ext {
 dependencies {
     implementation "org.jetbrains.kotlin:kotlin-stdlib-jdk8"
     implementation("com.squareup.moshi:moshi:1.15.1")
-    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.1")
+    kapt("com.squareup.moshi:moshi-kotlin-codegen:1.15.2")
 
     // Test Dependencies
     testCompile group: 'junit', name: 'junit', version: '4.13.2'
